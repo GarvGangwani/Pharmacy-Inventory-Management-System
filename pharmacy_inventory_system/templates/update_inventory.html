@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Update Inventory{% endblock %}
+
+{% block content %}
+<h2>Update Inventory</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="medication_id">Select Medication:</label>
+        <select name="medication_id" id="medication_id" required>
+            {% for medication in medications %}
+                <option value="{{ medication.id }}">{{ medication.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quantity">New Quantity:</label>
+        <input type="number" name="quantity" id="quantity" min="0" required>
+    </div>
+    <button type="submit">Update Inventory</button>
+</form>
+{% endblock %}

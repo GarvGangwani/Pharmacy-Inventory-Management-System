@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Historical Usage{% endblock %}
+
+{% block content %}
+<h2>Historical Usage</h2>
+<form method="GET">
+    <div class="form-group">
+        <label for="medication_id">Select Medication:</label>
+        <select name="medication_id" id="medication_id" required>
+            {% for medication in medications %}
+                <option value="{{ medication.id }}">{{ medication.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="period">Select Period:</label>
+        <select name="period" id="period">
+            <option value="month">Monthly</option>
+            <option value="year">Yearly</option>
+        </select>
+    </div>
+    <button type="submit">View Usage</button>
+</form>
+
+{% if usage_data %}
+    <table>
+        <thead>
+            <tr>
+                <th>Period</th>
+                <th>Total Used</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in usage_data %}
+            <tr>
+                <td>
+                    {% if data.month %}
+                        {{ data.year }}-{{ data.month }}
+                    {% else %}
+                        {{ data.year }}
+                    {% endif %}
+                </td>
+                <td>{{ data.total_used }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No usage data available for the selected medication and period.</p>
+{% endif %}
+{% endblock %}

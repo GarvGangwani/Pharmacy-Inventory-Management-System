@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<section>
+    <h3>Expiry Alerts</h3>
+    {% if expiry_alerts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Medication Name</th>
+                    <th>Expiry Date</th>
+                    <th>Current Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for alert in expiry_alerts %}
+                <tr>
+                    <td>{{ alert.name }}</td>
+                    <td>{{ alert.expiry_date }}</td>
+                    <td>{{ alert.quantity }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No medications are expiring soon.</p>
+    {% endif %}
+</section>
+{% endblock %}

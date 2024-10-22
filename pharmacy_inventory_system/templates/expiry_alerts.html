@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Expiry Alerts{% endblock %}
+
+{% block content %}
+<h2>Expiry Alerts</h2>
+{% if alerts %}
+    <table>
+        <thead>
+            <tr>
+                <th>Medication Name</th>
+                <th>Expiry Date</th>
+                <th>Current Quantity</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alert in alerts %}
+            <tr>
+                <td>{{ alert.name }}</td>
+                <td>{{ alert.expiry_date }}</td>
+                <td>{{ alert.quantity }}</td>
+                <td>
+                    <a href="{{ url_for('acknowledge_alert', alert_id=alert.id) }}">Acknowledge</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No medications are expiring soon.</p>
+{% endif %}
+{% endblock %}

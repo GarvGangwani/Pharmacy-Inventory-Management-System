@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory Report{% endblock %}
+
+{% block content %}
+<h2>Inventory Report</h2>
+{% if report_data %}
+    <table>
+        <thead>
+            <tr>
+                <th>Medication Name</th>
+                <th>Current Quantity</th>
+                <th>Reorder Threshold</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in report_data %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.reorder_threshold }}</td>
+                <td>{{ item.expiry_date }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.print()">Print Report</button>
+{% else %}
+    <p>No inventory data available.</p>
+{% endif %}
+{% endblock %}

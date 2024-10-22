@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Set Reorder Threshold{% endblock %}
+
+{% block content %}
+<h2>Set Reorder Threshold</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="medication_id">Select Medication:</label>
+        <select name="medication_id" id="medication_id" required>
+            {% for medication in medications %}
+                <option value="{{ medication.id }}">{{ medication.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="threshold">Reorder Threshold:</label>
+        <input type="number" name="threshold" id="threshold" min="0" required>
+    </div>
+    <button type="submit">Set Threshold</button>
+</form>
+{% endblock %}
